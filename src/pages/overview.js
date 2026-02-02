@@ -153,100 +153,105 @@ export const overviewPage = `<!DOCTYPE html>
 
         /* Card grid */
         .card-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        @media (max-width: 900px) {
-            .card-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 600px) {
-            .card-grid { grid-template-columns: 1fr; }
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
-        /* Card item */
+        /* Card item - horizontal layout */
         .card-item {
             background: var(--bg-primary);
-            border-radius: 16px;
-            padding: 24px;
+            border-radius: 12px;
+            padding: 20px;
             box-shadow: 0 2px 8px var(--shadow-color);
             transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            gap: 24px;
+            align-items: center;
         }
         .card-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px var(--shadow-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px var(--shadow-hover);
         }
 
-        .card-header {
+        .card-left {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid var(--border-color);
+            min-width: 180px;
+            flex-shrink: 0;
         }
-        .card-icon { font-size: 28px; }
+        .card-icon { font-size: 32px; }
+        .card-info { display: flex; flex-direction: column; gap: 4px; }
         .card-name {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--text-primary);
         }
+        .card-stats {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .stat-active { color: var(--success-color); }
 
+        .card-middle {
+            flex: 1;
+            display: flex;
+            gap: 32px;
+            min-width: 0;
+        }
         .card-section {
-            margin-bottom: 16px;
+            flex: 1;
+            min-width: 0;
         }
         .card-section-title {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
-
         .tag-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
         .tag {
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 13px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
             font-weight: 500;
         }
         .tag-service { background: var(--purple-bg); color: var(--purple-color); }
         .tag-account { background: var(--success-bg); color: var(--success-color); }
         .tag-count {
-            font-size: 11px;
+            font-size: 10px;
             opacity: 0.8;
-            margin-left: 4px;
+            margin-left: 2px;
         }
 
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 2px solid var(--border-color);
+        .card-right {
+            flex-shrink: 0;
         }
-        .card-stats {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-        .stat-active { color: var(--success-color); }
-        .stat-cancelled { color: var(--text-muted); }
         .card-link {
             color: var(--accent-color);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             display: flex;
             align-items: center;
             gap: 4px;
+            white-space: nowrap;
             transition: gap 0.2s;
         }
         .card-link:hover { gap: 8px; }
+
+        @media (max-width: 768px) {
+            .card-item { flex-direction: column; align-items: stretch; gap: 16px; }
+            .card-left { min-width: auto; }
+            .card-middle { flex-direction: column; gap: 16px; }
+            .card-right { align-self: flex-end; }
+        }
 
         /* Empty state */
         .empty {
@@ -423,25 +428,25 @@ export const overviewPage = `<!DOCTYPE html>
                 ).join('');
 
                 return '<div class="card-item">' +
-                    '<div class="card-header">' +
+                    '<div class="card-left">' +
                         '<span class="card-icon">💳</span>' +
-                        '<span class="card-name">' + escapeHtml(card.name) + '</span>' +
-                    '</div>' +
-                    '<div class="card-section">' +
-                        '<div class="card-section-title">绑定服务</div>' +
-                        '<div class="tag-list">' + (servicesHtml || '<span style="color:var(--text-muted)">无</span>') + '</div>' +
-                    '</div>' +
-                    '<div class="card-section">' +
-                        '<div class="card-section-title">关联账号</div>' +
-                        '<div class="tag-list">' + (accountsHtml || '<span style="color:var(--text-muted)">无</span>') + '</div>' +
-                    '</div>' +
-                    '<div class="card-footer">' +
-                        '<div class="card-stats">' +
-                            '<span class="stat-active">活跃 ' + card.activeCount + '</span>' +
-                            ' · ' +
-                            '<span class="stat-cancelled">已取消 ' + card.cancelledCount + '</span>' +
+                        '<div class="card-info">' +
+                            '<span class="card-name">' + escapeHtml(card.name) + '</span>' +
+                            '<span class="card-stats"><span class="stat-active">活跃 ' + card.activeCount + '</span> · 已取消 ' + card.cancelledCount + '</span>' +
                         '</div>' +
-                        '<a href="/detail?card=' + encodeURIComponent(card.name) + '" class="card-link">查看详情 →</a>' +
+                    '</div>' +
+                    '<div class="card-middle">' +
+                        '<div class="card-section">' +
+                            '<div class="card-section-title">绑定服务</div>' +
+                            '<div class="tag-list">' + (servicesHtml || '<span style="color:var(--text-muted)">无</span>') + '</div>' +
+                        '</div>' +
+                        '<div class="card-section">' +
+                            '<div class="card-section-title">关联账号</div>' +
+                            '<div class="tag-list">' + (accountsHtml || '<span style="color:var(--text-muted)">无</span>') + '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="card-right">' +
+                        '<a href="/detail?card=' + encodeURIComponent(card.name) + '" class="card-link">详情 →</a>' +
                     '</div>' +
                 '</div>';
             }).join('');
