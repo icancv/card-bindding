@@ -333,7 +333,7 @@ export const mainPage = `<!DOCTYPE html>
             border-radius: 8px;
         }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-        .skeleton-card { height: 120px; margin-bottom: 12px; }
+        .skeleton-card { min-height: 100px; margin-bottom: 12px; }
 
         /* Pagination */
         .pagination {
@@ -371,17 +371,30 @@ export const mainPage = `<!DOCTYPE html>
         .hidden-input { display: none; }
 
         /* Responsive */
+        @media (max-width: 768px) {
+            .header-actions { flex-wrap: wrap; }
+            .modal { max-width: 100%; margin: 10px; }
+            .confirm-dialog .modal { max-width: 100%; }
+            .toast-container { left: 20px; right: 20px; }
+            .toast { max-width: 100%; }
+            .pagination { gap: 4px; }
+            .pagination button { padding: 8px 12px; font-size: 13px; }
+        }
         @media (max-width: 600px) {
             .header { padding: 16px; }
             .header-inner { flex-wrap: wrap; gap: 12px; }
             .header h1 { font-size: 18px; }
-            .header-actions { width: 100%; justify-content: flex-end; }
+            .header-actions { width: 100%; justify-content: center; gap: 8px; }
+            .header-actions .btn { padding: 8px 12px; font-size: 13px; }
             .filters { flex-direction: column; }
             .filters input, .filters select { width: 100%; min-width: auto; }
             .stats { flex-direction: column; gap: 12px; }
             .sub-header { flex-direction: column; gap: 12px; }
             .sub-actions { width: 100%; }
             .sub-actions button { flex: 1; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .modal { margin: 0; border-radius: 0; max-height: 100vh; }
+            .toast-container { top: auto; bottom: 20px; }
         }
 
         /* Footer */
