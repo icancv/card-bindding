@@ -145,10 +145,11 @@ export const overviewPage = `<!DOCTYPE html>
             margin-bottom: 20px;
             box-shadow: 0 2px 8px var(--shadow-color);
             display: flex;
+            justify-content: space-between;
             gap: 24px;
             flex-wrap: wrap;
         }
-        .summary-item { font-size: 14px; color: var(--text-secondary); }
+        .summary-item { font-size: 14px; color: var(--text-secondary); flex: 1; text-align: center; }
         .summary-item strong { color: var(--accent-color); font-size: 18px; margin-right: 4px; }
 
         /* Card grid */
