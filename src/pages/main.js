@@ -5,7 +5,8 @@ export const mainPage = `<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>详情 - 卡片订阅小本本</title>
+    <title>卡片订阅小本本</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💳</text></svg>">
     <style>
         :root {
             --bg-body: #f5f7fa;
@@ -95,12 +96,16 @@ export const mainPage = `<!DOCTYPE html>
             background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
             color: white;
             padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
+        }
+        .header-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .header h1 { font-size: 20px; }
         .header-actions { display: flex; gap: 12px; align-items: center; }
@@ -365,7 +370,8 @@ export const mainPage = `<!DOCTYPE html>
 
         /* Responsive */
         @media (max-width: 600px) {
-            .header { padding: 16px; flex-wrap: wrap; gap: 12px; }
+            .header { padding: 16px; }
+            .header-inner { flex-wrap: wrap; gap: 12px; }
             .header h1 { font-size: 18px; }
             .header-actions { width: 100%; justify-content: flex-end; }
             .filters { flex-direction: column; }
@@ -375,22 +381,50 @@ export const mainPage = `<!DOCTYPE html>
             .sub-actions { width: 100%; }
             .sub-actions button { flex: 1; }
         }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-color);
+            padding: 24px 20px;
+            margin-top: 40px;
+        }
+        .footer-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer a:hover { color: var(--accent-color); }
+        .footer-links { display: flex; gap: 16px; }
     </style>
 </head>
 <body>
     <div class="toast-container" id="toastContainer"></div>
 
     <div class="header">
-        <h1>卡片订阅小本本</h1>
-        <div class="header-actions">
-            <a href="/" class="btn btn-secondary">概览</a>
-            <a href="/detail" class="btn btn-active">详情</a>
-            <button class="btn btn-secondary" onclick="exportData()">导出</button>
-            <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">导入</button>
-            <input type="file" id="importFile" class="hidden-input" accept=".json" onchange="importData(event)">
-            <button class="btn btn-primary" onclick="openModal()">+ 添加订阅</button>
-            <button class="btn-icon" onclick="toggleTheme()" title="切换主题">🌓</button>
-            <button class="btn btn-secondary" onclick="logout()">退出</button>
+        <div class="header-inner">
+            <h1>卡片订阅小本本</h1>
+            <div class="header-actions">
+                <a href="/" class="btn btn-secondary">概览</a>
+                <a href="/detail" class="btn btn-active">详情</a>
+                <button class="btn btn-secondary" onclick="exportData()">导出</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">导入</button>
+                <input type="file" id="importFile" class="hidden-input" accept=".json" onchange="importData(event)">
+                <button class="btn btn-primary" onclick="openModal()">+ 添加订阅</button>
+                <button class="btn-icon" onclick="toggleTheme()" title="切换主题">🌓</button>
+                <button class="btn btn-secondary" onclick="logout()">退出</button>
+            </div>
         </div>
     </div>
 
@@ -943,5 +977,14 @@ export const mainPage = `<!DOCTYPE html>
         }
         init();
     </script>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>&copy; 2026 卡片订阅小本本 · MIT License</div>
+            <div class="footer-links">
+                <a href="https://github.com/icancv/card-bindding" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>`;

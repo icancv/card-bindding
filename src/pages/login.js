@@ -6,7 +6,8 @@ export function getLoginPage(csrfToken = '') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登录 - 卡片订阅小本本</title>
+    <title>卡片订阅小本本</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💳</text></svg>">
     <style>
         :root {
             --bg-gradient-start: #667eea;
