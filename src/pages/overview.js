@@ -101,6 +101,7 @@ export const overviewPage = `<!DOCTYPE html>
         .header-inner {
             max-width: 1000px;
             margin: 0 auto;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -293,6 +294,7 @@ export const overviewPage = `<!DOCTYPE html>
         .footer-inner {
             max-width: 1000px;
             margin: 0 auto;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
