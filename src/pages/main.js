@@ -572,7 +572,8 @@ export const mainPage = `<!DOCTYPE html>
                 const search = document.getElementById('searchInput').value.trim();
                 if (search) params.set('search', search);
 
-                const card = document.getElementById('filterCard').value;
+                // Use URL param card filter if set, otherwise use dropdown value
+                const card = window.initialCardFilter || document.getElementById('filterCard').value;
                 if (card) params.set('card', card);
 
                 const service = document.getElementById('filterService').value;
@@ -631,11 +632,10 @@ export const mainPage = `<!DOCTYPE html>
             serviceFilter.innerHTML = '<option value="">全部服务</option>' +
                 allServices.map(s => '<option value="' + escapeHtml(s) + '">' + escapeHtml(s) + '</option>').join('');
 
-            // Apply initial card filter from URL param (only once)
+            // Apply initial card filter from URL param and sync dropdown
             if (window.initialCardFilter) {
                 cardFilter.value = window.initialCardFilter;
-                window.initialCardFilter = null; // Clear to avoid re-applying
-                loadData(); // Reload with filter applied
+                window.initialCardFilter = null; // Clear after syncing to dropdown
             } else {
                 cardFilter.value = currentCard;
             }
