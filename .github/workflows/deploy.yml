@@ -1,0 +1,60 @@
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Create D1 Database and Get ID
+        id: d1
+        run: |
+          # 尝试创建数据库，如果已存在则获取现有的
+          OUTPUT=$(wrangler d1 create card-bindding-db 2>&1 || true)
+
+          if echo "$OUTPUT" | grep -q "already exists"; then
+            # 数据库已存在，获取 ID
+            DB_ID=$(wrangler d1 list --json | jq -r '.[] | select(.name=="card-bindding-db") | .uuid')
+          else
+            # 新创建的数据库，从输出提取 ID
+            DB_ID=$(echo "$OUTPUT" | grep -oP 'database_id = "\K[^"]+')
+          fi
+
+          echo "database_id=$DB_ID" >> $GITHUB_OUTPUT
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Update wrangler.toml with Database ID
+        run: |
+          sed -i 's/database_id = ""/database_id = "${{ steps.d1.outputs.database_id }}"/' wrangler.toml
+
+      - name: Initialize Database Schema
+        run: |
+          wrangler d1 execute card-bindding-db --file=schema.sql --remote || echo "Schema may already exist"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Deploy Worker
+        run: wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Set Auth Password
+        run: echo "${{ secrets.AUTH_PASSWORD }}" | wrangler secret put AUTH_PASSWORD
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
