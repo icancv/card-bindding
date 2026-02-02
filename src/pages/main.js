@@ -142,7 +142,7 @@ export const mainPage = `<!DOCTYPE html>
         /* Filters */
         .filters {
             background: var(--bg-primary);
-            padding: 16px;
+            padding: 16px 20px;
             border-radius: 12px;
             margin-bottom: 20px;
             display: flex;

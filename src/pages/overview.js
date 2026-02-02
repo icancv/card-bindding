@@ -141,7 +141,7 @@ export const overviewPage = `<!DOCTYPE html>
             background: var(--bg-primary);
             padding: 16px 20px;
             border-radius: 12px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             box-shadow: 0 2px 8px var(--shadow-color);
             display: flex;
             gap: 24px;
