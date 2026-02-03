@@ -4,7 +4,7 @@
 export const CARD_GRADIENTS = [
     'linear-gradient(135deg, #f7971e 0%, #ffd200 100%)',
     'linear-gradient(135deg, #ec008c 0%, #fc6767 100%)',
-    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)',
     'linear-gradient(135deg, #f953c6 0%, #b91d73 100%)',
     'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)'
 ];

@@ -6,16 +6,16 @@ export const cssVariables = `
         --bg-body: #f5f7fa;
         --bg-primary: white;
         --bg-secondary: #f5f5f5;
-        --bg-gradient-start: #667eea;
-        --bg-gradient-end: #764ba2;
+        --bg-gradient-start: #3B82F6;
+        --bg-gradient-end: #1D4ED8;
         --text-primary: #333;
         --text-secondary: #666;
         --text-muted: #999;
         --border-color: #e0e0e0;
         --shadow-color: rgba(0,0,0,0.06);
         --shadow-hover: rgba(0,0,0,0.1);
-        --accent-color: #667eea;
-        --accent-hover: #5a6fd6;
+        --accent-color: #3B82F6;
+        --accent-hover: #2563EB;
         --success-color: #388e3c;
         --success-bg: #e8f5e9;
         --warning-color: #f57c00;
@@ -132,11 +132,11 @@ export const buttonStyles = `
         text-decoration: none;
     }
     .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    .btn-primary { background: white; color: #667eea; }
+    .btn-primary { background: white; color: #3B82F6; }
     .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
     .btn-secondary { background: rgba(255,255,255,0.2); color: white; text-decoration: none; }
     .btn-secondary:hover:not(:disabled) { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
-    .btn-active { background: white; color: #667eea; text-decoration: none; }
+    .btn-active { background: white; color: #3B82F6; text-decoration: none; }
     .btn-active:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
     .btn-icon {
         padding: 8px;
