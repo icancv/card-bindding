@@ -41,6 +41,8 @@ export const mainPage = `<!DOCTYPE html>
             --bg-body: #1a202c;
             --bg-primary: #2d3748;
             --bg-secondary: #4a5568;
+            --bg-gradient-start: #2d3748;
+            --bg-gradient-end: #1a202c;
             --text-primary: #e2e8f0;
             --text-secondary: #a0aec0;
             --text-muted: #718096;
@@ -65,6 +67,8 @@ export const mainPage = `<!DOCTYPE html>
                 --bg-body: #1a202c;
                 --bg-primary: #2d3748;
                 --bg-secondary: #4a5568;
+                --bg-gradient-start: #2d3748;
+                --bg-gradient-end: #1a202c;
                 --text-primary: #e2e8f0;
                 --text-secondary: #a0aec0;
                 --text-muted: #718096;
@@ -124,7 +128,7 @@ export const mainPage = `<!DOCTYPE html>
         .btn-primary { background: white; color: #667eea; }
         .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
         .btn-secondary { background: rgba(255,255,255,0.2); color: white; text-decoration: none; }
-        .btn-secondary:hover:not(:disabled) { background: rgba(255,255,255,0.3); }
+        .btn-secondary:hover:not(:disabled) { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
         .btn-active { background: white; color: #667eea; text-decoration: none; }
         .btn-active:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
         .btn-icon {
@@ -136,8 +140,9 @@ export const mainPage = `<!DOCTYPE html>
             color: white;
             font-size: 18px;
             line-height: 1;
+            transition: all 0.2s;
         }
-        .btn-icon:hover { background: rgba(255,255,255,0.3); }
+        .btn-icon:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
         .container { max-width: 1000px; margin: 0 auto; padding: 20px; flex: 1; }
 
         /* Page title */
@@ -178,6 +183,7 @@ export const mainPage = `<!DOCTYPE html>
         .title-actions .action-btn-primary:hover {
             background: var(--accent-hover);
             border-color: var(--accent-hover);
+            color: white;
         }
 
         /* Filters */
