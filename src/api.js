@@ -257,8 +257,18 @@ export async function handleAPI(request, env, path) {
         return jsonResponse({ success: true, imported });
     }
 
-    // PUT /api/subscriptions/:id - Update subscription
+    // GET /api/subscriptions/:id - Get single subscription
     const subMatch = path.match(/^\/api\/subscriptions\/(\d+)$/);
+    if (subMatch && method === 'GET') {
+        const id = subMatch[1];
+        const result = await env.DB.prepare('SELECT * FROM subscriptions WHERE id = ?').bind(id).first();
+        if (!result) {
+            return errorResponse('记录不存在', 404);
+        }
+        return jsonResponse(result);
+    }
+
+    // PUT /api/subscriptions/:id - Update subscription
     if (subMatch && method === 'PUT') {
         // CSRF check
         if (!verifyCSRF(request)) {
