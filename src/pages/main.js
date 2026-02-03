@@ -566,11 +566,11 @@ export const mainPage = `<!DOCTYPE html>
 
     <div class="header">
         <div class="header-inner">
-            <h1>卡片订阅小本本</h1>
+            <h1><a href="/" style="color:inherit;text-decoration:none">卡片订阅小本本</a></h1>
             <div class="header-actions">
                 <a href="/" class="btn btn-secondary">概览</a>
                 <a href="/detail" class="btn btn-active">详情</a>
-                <button class="btn-icon" onclick="toggleTheme()" title="切换主题">🌓</button>
+                <button class="btn-icon" id="themeBtn" onclick="toggleTheme()" title="切换主题">🌙</button>
                 <button class="btn btn-secondary" onclick="logout()">退出</button>
             </div>
         </div>
@@ -778,21 +778,29 @@ export const mainPage = `<!DOCTYPE html>
         }
 
         // Theme toggle
+        function isDark() {
+            var theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') return true;
+            if (theme === 'light') return false;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        function updateThemeIcon() {
+            document.getElementById('themeBtn').textContent = isDark() ? '☀️' : '🌙';
+        }
+
         function toggleTheme() {
-            var html = document.documentElement;
-            var current = html.getAttribute('data-theme');
-            var next;
-            if (current === 'dark') next = 'light';
-            else if (current === 'light') next = 'dark';
-            else next = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'light' : 'dark';
-            html.setAttribute('data-theme', next);
+            var next = isDark() ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
+            updateThemeIcon();
         }
 
         // Initialize theme
         function initTheme() {
             var saved = localStorage.getItem('theme');
             if (saved) document.documentElement.setAttribute('data-theme', saved);
+            updateThemeIcon();
         }
         initTheme();
 
