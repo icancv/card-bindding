@@ -141,9 +141,44 @@ export const mainPage = `<!DOCTYPE html>
         .container { max-width: 1000px; margin: 0 auto; padding: 20px; flex: 1; }
 
         /* Page title */
-        .page-title { margin-bottom: 20px; }
+        .page-title {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+        }
         .page-title h2 { font-size: 22px; font-weight: 700; color: var(--text-primary); }
         .page-title .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+        .title-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .title-actions .action-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .title-actions .action-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        .title-actions .action-btn-primary {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+        .title-actions .action-btn-primary:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
 
         /* Filters */
         .filters {
@@ -454,7 +489,14 @@ export const mainPage = `<!DOCTYPE html>
             padding-top: 12px;
             border-top: 1px solid var(--border-color);
         }
-        .mobile-card-actions button { flex: 1; }
+        .mobile-card-actions button {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -474,6 +516,9 @@ export const mainPage = `<!DOCTYPE html>
             .header-actions .btn { padding: 8px 12px; font-size: 13px; }
             .filters { flex-direction: column; }
             .filters input, .filters select { width: 100%; min-width: auto; }
+            .page-title { flex-direction: column; }
+            .title-actions { width: 100%; }
+            .title-actions .action-btn { flex: 1; text-align: center; }
             .footer-inner { flex-direction: column; text-align: center; }
             .modal { margin: 0; border-radius: 0; max-height: 100vh; }
             .toast-container { top: auto; bottom: 20px; }
@@ -519,10 +564,6 @@ export const mainPage = `<!DOCTYPE html>
             <div class="header-actions">
                 <a href="/" class="btn btn-secondary">概览</a>
                 <a href="/detail" class="btn btn-active">详情</a>
-                <button class="btn btn-secondary" onclick="exportData()">导出</button>
-                <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">导入</button>
-                <input type="file" id="importFile" class="hidden-input" accept=".json" onchange="importData(event)">
-                <button class="btn btn-primary" onclick="openModal()">+ 添加订阅</button>
                 <button class="btn-icon" onclick="toggleTheme()" title="切换主题">🌓</button>
                 <button class="btn btn-secondary" onclick="logout()">退出</button>
             </div>
@@ -531,8 +572,16 @@ export const mainPage = `<!DOCTYPE html>
 
     <div class="container">
         <div class="page-title">
-            <h2>银行卡绑定信息</h2>
-            <p class="subtitle" id="totalInfo">加载中...</p>
+            <div>
+                <h2>银行卡绑定信息</h2>
+                <p class="subtitle" id="totalInfo">加载中...</p>
+            </div>
+            <div class="title-actions">
+                <button class="action-btn" onclick="exportData()">导出</button>
+                <button class="action-btn" onclick="document.getElementById('importFile').click()">导入</button>
+                <input type="file" id="importFile" class="hidden-input" accept=".json" onchange="importData(event)">
+                <button class="action-btn action-btn-primary" onclick="openModal()">+ 添加订阅</button>
+            </div>
         </div>
 
         <div class="filters">
