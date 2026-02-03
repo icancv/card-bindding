@@ -19,11 +19,13 @@ export function getLoginPage(csrfToken = '') {
         /* Left panel - Brand area */
         .left-panel {
             flex: 1;
-            background: linear-gradient(180deg, #4facfe 0%, #00f2fe 30%, #f6d365 100%);
+            background: linear-gradient(180deg, #2563EB 0%, #1E40AF 50%, #1E3A8A 100%);
             padding: 60px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
@@ -64,12 +66,12 @@ export function getLoginPage(csrfToken = '') {
             line-height: 1.2;
         }
         .hero-title .highlight {
-            color: #ffd700;
+            color: #60A5FA;
         }
 
         .hero-desc {
             font-size: 16px;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.85);
             line-height: 1.8;
             margin-bottom: 48px;
             max-width: 360px;
@@ -80,21 +82,23 @@ export function getLoginPage(csrfToken = '') {
             display: flex;
             flex-direction: column;
             gap: 16px;
+            width: 100%;
+            max-width: 320px;
         }
         .feature-card {
             display: flex;
             align-items: center;
             gap: 16px;
             padding: 16px 20px;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
             border-radius: 12px;
-            max-width: 320px;
+            text-align: left;
         }
         .feature-icon {
             width: 40px;
             height: 40px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -182,8 +186,8 @@ export function getLoginPage(csrfToken = '') {
         }
         .input-wrapper input:focus {
             outline: none;
-            border-color: #4facfe;
-            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
         .input-wrapper input::placeholder {
             color: #a0aec0;
@@ -212,7 +216,7 @@ export function getLoginPage(csrfToken = '') {
         .submit-btn {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
             color: white;
             border: none;
             border-radius: 12px;
@@ -223,7 +227,7 @@ export function getLoginPage(csrfToken = '') {
         }
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(79, 172, 254, 0.4);
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
         }
         .submit-btn:active {
             transform: translateY(0);
@@ -275,6 +279,7 @@ export function getLoginPage(csrfToken = '') {
             .features {
                 flex-direction: row;
                 flex-wrap: wrap;
+                max-width: 100%;
             }
             .feature-card {
                 flex: 1;
